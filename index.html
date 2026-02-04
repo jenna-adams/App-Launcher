@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My App Launcher</title>
+    <title>Quick Launch</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -37,9 +37,9 @@
             text-decoration: none;
             color: #333;
             font-weight: bold;
+            text-align: center;
         }
         .btn:active { transform: scale(0.95); }
-        .btn i { font-size: 40px; margin-bottom: 10px; }
         
         /* Specific brand colors */
         .spotify { border-bottom: 5px solid #1DB954; }
@@ -53,22 +53,26 @@
     <h1>Quick Launch</h1>
     
     <div class="container">
-        <a href="spotify://" class="btn spotify">
+        <a href="https://open.spotify.com" class="btn spotify">
             <span>Spotify</span>
         </a>
 
-        <a href="comgooglemaps://" class="btn maps">
+        <a href="https://maps.google.com" class="btn maps">
             <span>Google Maps</span>
         </a>
 
-        <a href="youtube://" class="btn youtube">
+        <a href="https://www.youtube.com" class="btn youtube">
             <span>YouTube</span>
         </a>
 
-        <a href="instagram://" class="btn instagram">
+        <a href="https://www.instagram.com" class="btn instagram">
             <span>Instagram</span>
         </a>
     </div>
 
+    <script>
+        // Optional: Force direct app schemes ONLY if the browser supports it
+        // But standard HTTPS links are currently the most reliable 'Universal' way.
+    </script>
 </body>
 </html>
