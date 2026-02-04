@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My App Launcher</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 140px;
+            height: 140px;
+            border: none;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .btn:active { transform: scale(0.95); }
+        .btn i { font-size: 40px; margin-bottom: 10px; }
+        
+        /* Specific brand colors */
+        .spotify { border-bottom: 5px solid #1DB954; }
+        .maps { border-bottom: 5px solid #4285F4; }
+        .youtube { border-bottom: 5px solid #FF0000; }
+        .instagram { border-bottom: 5px solid #E1306C; }
+    </style>
+</head>
+<body>
+
+    <h1>Quick Launch</h1>
+    
+    <div class="container">
+        <a href="spotify://" class="btn spotify">
+            <span>Spotify</span>
+        </a>
+
+        <a href="comgooglemaps://" class="btn maps">
+            <span>Google Maps</span>
+        </a>
+
+        <a href="youtube://" class="btn youtube">
+            <span>YouTube</span>
+        </a>
+
+        <a href="instagram://" class="btn instagram">
+            <span>Instagram</span>
+        </a>
+    </div>
+
+</body>
+</html>
