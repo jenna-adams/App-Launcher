@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My App Launcher</title>
+    <title>Quick Launch</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -47,21 +47,20 @@
 </head>
 <body>
 
-    <h1>Quick Launch</h1>
+    <h2>Quick Launch</h2>
     
     <div class="container">
-        <button onclick="launch('spotify')" class="btn spotify"><span>Spotify</span></button>
-        <button onclick="launch('maps')" class="btn maps"><span>Google Maps</span></button>
-        <button onclick="launch('youtube')" class="btn youtube"><span>YouTube</span></button>
-        <button onclick="launch('instagram')" class="btn instagram"><span>Instagram</span></button>
+        <button onclick="launch('spotify')" class="btn spotify">Spotify</button>
+        <button onclick="launch('maps')" class="btn maps">Google Maps</button>
+        <button onclick="launch('youtube')" class="btn youtube">YouTube</button>
+        <button onclick="launch('instagram')" class="btn instagram">Instagram</button>
     </div>
 
     <script>
         function launch(app) {
             const isAndroid = /android/i.test(navigator.userAgent);
-            let url;
-
-            const config = {
+            
+            const schemes = {
                 spotify: {
                     ios: "spotify://",
                     android: "intent://#Intent;scheme=spotify;package=com.spotify.music;end"
@@ -80,21 +79,11 @@
                 }
             };
 
-            url = isAndroid ? config[app].android : config[app].ios;
-
-            // The "Force Launch"
-            window.location.href = url;
+            const url = isAndroid ? schemes[app].android : schemes[app].ios;
             
-            // Fallback: If app doesn't open in 1.5 seconds, try a standard web link
-            setTimeout(() => {
-                const webFallbacks = {
-                    spotify: "https://open.spotify.com",
-                    maps: "https://maps.google.com",
-                    youtube: "https://www.youtube.com",
-                    instagram: "https://www.instagram.com"
-                };
-                window.location.href = webFallbacks[app];
-            }, 1500);
+            // This attempts to open the app. 
+            // If the app is not installed, it will simply do nothing.
+            window.location.replace(url);
         }
     </script>
 </body>
