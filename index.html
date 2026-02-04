@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick Launch</title>
+    <title>My App Launcher</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -37,11 +37,8 @@
             text-decoration: none;
             color: #333;
             font-weight: bold;
-            text-align: center;
         }
         .btn:active { transform: scale(0.95); }
-        
-        /* Specific brand colors */
         .spotify { border-bottom: 5px solid #1DB954; }
         .maps { border-bottom: 5px solid #4285F4; }
         .youtube { border-bottom: 5px solid #FF0000; }
@@ -53,26 +50,52 @@
     <h1>Quick Launch</h1>
     
     <div class="container">
-        <a href="https://open.spotify.com" class="btn spotify">
-            <span>Spotify</span>
-        </a>
-
-        <a href="https://maps.google.com" class="btn maps">
-            <span>Google Maps</span>
-        </a>
-
-        <a href="https://www.youtube.com" class="btn youtube">
-            <span>YouTube</span>
-        </a>
-
-        <a href="https://www.instagram.com" class="btn instagram">
-            <span>Instagram</span>
-        </a>
+        <button onclick="launch('spotify')" class="btn spotify"><span>Spotify</span></button>
+        <button onclick="launch('maps')" class="btn maps"><span>Google Maps</span></button>
+        <button onclick="launch('youtube')" class="btn youtube"><span>YouTube</span></button>
+        <button onclick="launch('instagram')" class="btn instagram"><span>Instagram</span></button>
     </div>
 
     <script>
-        // Optional: Force direct app schemes ONLY if the browser supports it
-        // But standard HTTPS links are currently the most reliable 'Universal' way.
+        function launch(app) {
+            const isAndroid = /android/i.test(navigator.userAgent);
+            let url;
+
+            const config = {
+                spotify: {
+                    ios: "spotify://",
+                    android: "intent://#Intent;scheme=spotify;package=com.spotify.music;end"
+                },
+                maps: {
+                    ios: "comgooglemaps://",
+                    android: "intent://#Intent;scheme=geo;package=com.google.android.apps.maps;end"
+                },
+                youtube: {
+                    ios: "youtube://",
+                    android: "intent://#Intent;scheme=vnd.youtube;package=com.google.android.youtube;end"
+                },
+                instagram: {
+                    ios: "instagram://",
+                    android: "intent://#Intent;scheme=instagram;package=com.instagram.android;end"
+                }
+            };
+
+            url = isAndroid ? config[app].android : config[app].ios;
+
+            // The "Force Launch"
+            window.location.href = url;
+            
+            // Fallback: If app doesn't open in 1.5 seconds, try a standard web link
+            setTimeout(() => {
+                const webFallbacks = {
+                    spotify: "https://open.spotify.com",
+                    maps: "https://maps.google.com",
+                    youtube: "https://www.youtube.com",
+                    instagram: "https://www.instagram.com"
+                };
+                window.location.href = webFallbacks[app];
+            }, 1500);
+        }
     </script>
 </body>
 </html>
